@@ -1,0 +1,105 @@
+<!--
+  Autor : Regi
+  Proyecto Math dice IA
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Math Dice IA</title>
+
+        <style type="text/css">
+
+      h1
+        {
+            border: none;
+            font-size: 60px;
+            text-align: center;
+        }
+
+        #text
+          {
+              border: none;
+              font-size: 24px;
+              text-align: center;
+          }
+
+          input[name="button"]
+          {
+             background-color: #008CBA; /* BLUE */
+             border: none;
+             color: white;
+             padding: 10px 22px;
+             text-align: center;
+             text-decoration: none;
+             display: inline-block;
+             font-size: 20px;
+             margin: 3px 1px;
+             cursor: pointer;
+             border-radius: 12px;
+          }
+
+      </style>
+
+  </head>
+  <body>
+    <div style="text-align:center" id="contenido">
+        <h1>BIENVENIDOS AL JUEGO MATH DICE !</h1>
+
+        <p id="text">VAMOS A TIRAR EL PRIMER DADO</p>
+        <p id="text"><label id="dado1"></label></p>
+    </div>
+
+    <!-- <label align="left" id="Mensaje">GANA</label>-->
+
+    <!-- POSCION 1º DADOS -->
+    <div id="botones_1" align="center">
+
+      <!-- Dados-->
+        <input name="button"  type="button" id="boton_" onclick="insertText(value,id)"></input>
+  </div>
+  <!-- POSCION 2º DADOS -->
+  <div id="botones_2" align="center"></div>
+
+  <br>
+  <div style="text-align:center">
+
+    <!-- SUMA Y RESTA-->
+    <input name="button" type="button" id="boton_resta" value="-" onclick="insertText(value,id)"></input>
+    <input name="button" type="button" id="boton_suma" value="+" onclick="insertText(value,id)"></input>
+
+    <br><br><br>
+    <table border="0" cellpadding="10" cellspacing="0" width="100" align="center">
+        <tr>
+          <td>
+            <!-- Text area para rellenar con los números y signos para el Jugador -->
+            <textarea id="text_area_Player" rows="3" cols="20" readonly></textarea>
+          </td>
+            <td>
+              <!-- Text area para rellenar con los números y signos para la IA -->
+              <textarea id="text_area_IA" rows="3" cols="20" readonly></textarea>
+            </td>
+        </tr>
+          <tr>
+            <td>
+              <!-- Botón comprobación -->
+                <input name="button" type="button" id="submit_operación" value="Comprobación" onclick="ComprobaciónOperación(id);"/>
+            </td>
+            <td>
+              <!-- Botón Actualización -->
+              <input name="button" type="button" id="volver_jugar" value="Volver a Jugar" onclick="history.go(0)"/>
+            </td>
+          </tr>
+        </table>
+
+
+  </div>
+
+
+  <script type="text/javascript" src="mathdiceIA.js"></script>
+
+  </body>
+</html>

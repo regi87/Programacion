@@ -1,0 +1,55 @@
+<!--
+  Autor : Regi
+  Actividad 03 Adivinación
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+
+  </head>
+
+
+  <body>
+
+    <script type="text/javascript">
+        //Declaración de variables
+        var num_player= 0;
+        var num_console=  Math.round(Math.random() * (100 - 1) + 1);
+        //Función Aleatoria
+      //  Math.round(Math.random() * (100 - 1) + 1);
+      //Validación del rango númerico
+      while (num_player <1 || num_player >100 )
+      {
+        num_player = prompt("Número Solicitado: ");
+        document.write( num_console );
+
+      }
+
+
+        console.log(num_console);
+        console.log(num_player);
+
+          //Condiciones comprobación
+         if(num_player > num_console)
+          {
+            alert("TE PASASTE ");
+          }
+          else if(num_player < num_console)
+          {
+              alert("TE QUEDASTE CORTO ");
+          }
+          else
+          {
+              alert("ACERTASTE ");
+          }
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!--
+  Autor : Regi
+  Proyecto Math dice
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Math Dice</title>
+
+  </head>
+  <body>
+    <h1>MATH DICE</h1>
+
+    <form>
+      <p>
+
+<!-- Id con el nombre que utilizaremos en el js !
+-->
+         <div style="color:#8A0808" id="dado1">Dado_12_caras</div>
+         <!-- 3 Dados de 6 caras  -->
+
+        <br>
+         <div style="color:#0000FF" id="dado2">Dado_6_caras_1</div>
+         <div style="color:#0000FF" id="dado3">Dado_6_caras_2</div>
+         <div style="color:#0000FF" id="dado4">Dado_6_caras_3</div>
+
+         <!-- 2 Dados de 3 caras  -->
+        <br>
+        <div style="color:#3ADF00" id="dado5">Dado_3_caras_5</div>
+        <div style="color:#3ADF00" id="dado6">Dado_3_caras_6</div>
+        <!-- Botones -->
+
+        <br>
+          <!-- Botones con los números del dado de 6 caras-->
+        <div>
+          <input type="button" id="bot_dado6_1" value="" onclick="insertText(value,id);"/>
+          <input type="button" id="bot_dado6_2" value="" onclick="insertText(value,id);"/>
+          <input type="button" id="bot_dado6_3" value="" onclick="insertText(value,id);"/>
+        </div>
+        <br>
+        <!-- Botones con los números del dado de 3 caras-->
+
+        <div>
+          <input type="button" id="bot_dado3_1" value="" onclick="insertText(value,id);"/>
+          <input type="button" id="bot_dado3_2" value="" onclick="insertText(value,id);"/>
+        </div>
+
+        <br>
+        <!-- Botones para la suma o resta-->
+
+        <div>
+          <input type="button" id="boton_resta" value="" onclick="insertText(value,id);"/>
+          <input type="button" id="boton_suma" value="" onclick="insertText(value,id);"/>
+        </div>
+
+      </p>
+
+      <!-- Text area para rellenar con los números y signos -->
+      <textarea id="text_area" rows="2" cols="20" readonly></textarea>
+
+    </form>
+    <div>
+      <input type="button" id="submit_operación" value="Comprobación" onclick="ComprobaciónOperación(id);"/>
+      <input type="button" id="volver_jugar" value="Volver a Jugar" onclick="history.go(0)"/>
+
+    </div>
+
+    <script type="text/javascript" src="mathdice.js"></script>
+
+  </body>
+</html>

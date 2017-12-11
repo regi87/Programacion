@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Actividad_Refuerzo_1</title>
+
+        <style type="text/css">
+            textarea
+            {
+              font-family: arial, verdana, ms sans serif;
+              font-size: 14pt;
+              text-align: center;
+            }
+        </style>
+  </head>
+  <body>
+
+      <br>
+      <table style="width:30%" border="5">
+        <tr>
+          <th colspan="2"><p id="parrafo_1">Este es el parrafo a cambiar</p></th>
+        </tr>
+        <tr>
+          <td>NÚMERO 1</td>
+          <td>
+            <textarea name= "textarea" id="text_area_1" rows="1" cols="14" >0</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>NÚMERO 2</td>
+          <td>
+            <textarea name= "textarea" id="text_area_2" rows="1" cols="14" >0</textarea>
+          </td>
+        </tr>
+    </table>
+
+    <br>
+    <div>
+      <input type="button" id="enviar_num" value="Comprobación" onclick="Comprobacion()"/>
+      <input type="button"  id="reseteo" value="Otra Vez" onclick="history.go(0)"/>
+
+    </div>
+
+    <script type="text/javascript" src="refuerzo_1.js"></script>
+  </body>
+</html>
