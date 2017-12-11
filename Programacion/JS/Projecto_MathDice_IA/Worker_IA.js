@@ -8,18 +8,12 @@ console.log(e);
  var workerArray_3 = e.data[2];
  //numero del array para comprobar
  var numeroAleComprobar = 0;
-
  //numero aleatorio = posicon !
  var num_Ale_PosArray = 0;
 //variable para coger el numero de la posicion != de 0
-  var cambioPosc = 0;
-
+var cambioPosc = 0;
 var max = 0;
 var min = 0;
-
-//poscion funciones
-var pos_Array_Funciones_Sumas =1;
-var pos_Array_Funciones_Restas =0;
 
 //array numero comprobados
 var arrayNum_Comprobados =[0];
@@ -33,7 +27,6 @@ var diferencia_min_resta = false;
 var encontrado = false;
 //resultado NOENCONTRAD
 var NoOencontrado = false;
-
 //array de posciones i
 var arrayI_Posc=[0];
 
@@ -46,8 +39,7 @@ while(encontrado == false && numeroOperaciones < 20 )
 function NumeroAleatorio(_numeroOperaciones)
 {
       arrayNum_Comprobados[_numeroOperaciones]=_numeroOperaciones;
-
-  JuntamosArray_Y_CambioPosciones(arrayNum_Comprobados[_numeroOperaciones]);
+      JuntamosArray_Y_CambioPosciones(arrayNum_Comprobados[_numeroOperaciones]);
 }
 
 function JuntamosArray_Y_CambioPosciones(_num_Ale_PosArray)
@@ -83,12 +75,10 @@ function JuntamosArray_Y_CambioPosciones(_num_Ale_PosArray)
   {
     arrayDefinitivo[i-1] =arrayComprobacion[i];
   }
-
   for (let i = 0; i < arrayDefinitivo.length; i++)
   {
     arrayI_Posc[i]="null";
   }
-
   Operaciones(arrayDefinitivo, numeroAleComprobar);
 }
 
@@ -108,6 +98,7 @@ function Operaciones(_arrayDefinitivo, _numeroAleComprobar)
   Comprobamos(listaOperacionArraysSumas,listaOperacionArraysRestas,_arrayDefinitivo,_numeroAleComprobar);
 
 }
+
 function Operaciones2(_arrayDefinitivo,listaOperacionArrays,_i,_signo)
 {
       arrayI_Posc[_i]=_i;
@@ -115,13 +106,13 @@ function Operaciones2(_arrayDefinitivo,listaOperacionArrays,_i,_signo)
 console.log("POSICIONES: "+arrayI_Posc);
 console.log("ARRAY DEFINITVO: "+_arrayDefinitivo);
 
-    for (let i = 0; i < _arrayDefinitivo.length; i++)
-    {
-      if(arrayI_Posc[i]!=i)
-      {
-        listaOperacionArrays[i]=listaOperacionArrays[_i]+_signo+_arrayDefinitivo[i];
-      }
-    }
+        for (let i = 0; i < _arrayDefinitivo.length; i++)
+        {
+          if(arrayI_Posc[i]!=i)
+          {
+            listaOperacionArrays[i]=listaOperacionArrays[_i]+_signo+_arrayDefinitivo[i];
+          }
+        }
       Comprobamos(listaOperacionArrays,0,_arrayDefinitivo);
 }
 
@@ -130,55 +121,53 @@ function Comprobamos(_listaOperacionArraysSumas,_listaOperacionArraysRestas,_arr
 {
   let _i = 0;
 
-  for (let i = 0; i < _arrayDefinitivo.length; i++)
-  {
-        if(workerResultado - eval(_listaOperacionArraysSumas[i]) == 0)
-        {
-          diferencia_min_suma =true;
-          Econtrado (_listaOperacionArraysSumas[i]);
-        }
-        else if(workerResultado - eval(_listaOperacionArraysRestas[i]) == 0)
-        {
-          diferencia_min_resta =true;
-          Econtrado (_listaOperacionArraysRestas[i]);
-        }
-    }
-
-if( diferencia_min_suma == false && encontrado == false)
-{
-        for (let i = 0; i < _arrayDefinitivo.length; i++)
-        {
-           if(eval(_listaOperacionArraysSumas[i]) > max && eval(_listaOperacionArraysSumas[i]) < workerResultado)
+      for (let i = 0; i < _arrayDefinitivo.length; i++)
+      {
+            if(workerResultado - eval(_listaOperacionArraysSumas[i]) == 0)
             {
-                _i =i;
-                  max = eval(_listaOperacionArraysSumas[i]);
-                if(max<workerResultado)
-                {
-                    if(encontrado==false)
-                    NoEncontrado(_listaOperacionArraysSumas,_arrayDefinitivo,_i,"+");
-                }
+              diferencia_min_suma =true;
+              Econtrado (_listaOperacionArraysSumas[i]);
             }
-
-            if(eval(_listaOperacionArraysRestas[i]) > min && eval(_listaOperacionArraysRestas[i]) > workerResultado)
-             {
-                 _i =i;
-                   min = eval(_listaOperacionArraysRestas[i]);
-                 if(min>workerResultado)
-                 {
-                     if(encontrado==false)
-                     NoEncontrado(_listaOperacionArraysRestas,_arrayDefinitivo,_i,"-");
-                 }
-             }
+            else if(workerResultado - eval(_listaOperacionArraysRestas[i]) == 0)
+            {
+              diferencia_min_resta =true;
+              Econtrado (_listaOperacionArraysRestas[i]);
+            }
         }
-    }
 
+      if( diferencia_min_suma == false && encontrado == false)
+      {
+              for (let i = 0; i < _arrayDefinitivo.length; i++)
+              {
+                 if(eval(_listaOperacionArraysSumas[i]) > max && eval(_listaOperacionArraysSumas[i]) < workerResultado)
+                  {
+                      _i =i;
+                        max = eval(_listaOperacionArraysSumas[i]);
+                      if(max<workerResultado)
+                      {
+                          if(encontrado==false)
+                          NoEncontrado(_listaOperacionArraysSumas,_arrayDefinitivo,_i,"+");
+                      }
+                  }
+
+                  if(eval(_listaOperacionArraysRestas[i]) > min && eval(_listaOperacionArraysRestas[i]) > workerResultado)
+                   {
+                       _i =i;
+                         min = eval(_listaOperacionArraysRestas[i]);
+                       if(min>workerResultado)
+                       {
+                           if(encontrado==false)
+                           NoEncontrado(_listaOperacionArraysRestas,_arrayDefinitivo,_i,"-");
+                       }
+                   }
+              }
+          }
 }
 
 
 function NoEncontrado(_listaOperacionArrays,_arrayDefinitivo,_i,_signo)
 {
   console.log("OPERACION:  "+_listaOperacionArrays[_i]);
-
   Operaciones2(_arrayDefinitivo, _listaOperacionArrays,_i,_signo);
 }
 
@@ -187,8 +176,6 @@ function Econtrado (_listaOperacionArrays)
   encontrado=true;
   console.log("ENCONTRADO::  "+_listaOperacionArrays);
 }
-
-
 
  postMessage([workerResultado,workerArray_2]);
 }
