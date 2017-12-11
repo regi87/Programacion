@@ -14,13 +14,13 @@ var arrayNodos = [1];
 
 function Init()
 {
-      nodoBoton_plantilla.value = "0";
+      nodoBoton_plantilla.value = "";
 
       //añadimos al array los clones de los botones por cada posición en el array un clon
       for(let i=1; i<91; i++)
       {   arrayNodos[i]=nodoBoton_plantilla.cloneNode(true);
           arrayNodos[i].id="boton_"+i;
-          arrayNodos[i].value = i;
+          arrayNodos[i].value = "";
           //añade los botones
           nodoBoton_padre.appendChild(arrayNodos[i]);
       }
