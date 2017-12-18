@@ -8,7 +8,6 @@
   <head>
     <meta charset="utf-8">
     <title>BINGO</title>
-
       <style type="text/css">
         input[type="text"]
         {
@@ -17,30 +16,40 @@
             text-align: center;
         }
 
-
       input[name="button"]
       {
-         font-size:30px;
+         text-align: center;
+         line-height: 15px;
+         font-size:20px;
          font-weight:bold;
           border-radius: 200px 200px 200px 200px;
           -moz-border-radius: 200px 200px 200px 200px;
           -webkit-border-radius: 200px 200px 200px 200px;
           border: 1px solid #e06e7d;
-          padding: 10px 10px;
+          padding: 10px 8px;
            margin: 5px 5px;
-           height: 50px;
-           width: 50px;
+           height: 40px;
+           width: 40px;
         }
 
-      </style>
+        input[name="boton_2"]
+        {
+          font-size:13px;
+          background: #f5da89;
+          border-radius: 10px 10px 10px 10px;
+          -moz-border-radius: 10px 10px 10px 10px;
+          -webkit-border-radius: 10px 10px 10px 10px;
+          border: 3px solid #87f5ef;
+          height: 40px;
+          width: 92px;
+        }
 
+
+      </style>
   </head>
   <body>
-
             <h1>BIENVENIDOS AL BINGO!</h1>
-
           </div>
-
                 <table type ="text/css" border="2" width="1500" height="80">
                   <tr>
                     <td >
@@ -52,17 +61,24 @@
                       <input name="button"  type="button" id="boton_"></input>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <input name="boton_2"  type="button" id="boton_reiniciar" value="REINICIAR"></inpt>
+                      <input name="boton_2"  type="button" id="boton_pausa" value="PAUSA"></inpt>
+                    </td>
+
+                  </tr>
                 </table>
           <br>
     </div>
 
-      <br><br><br>
+      <br>
 
       <table border="2" align ="center" cellspacing="10">
             <tr>
               <td >
                   <div style="text-align:center" id="contenido_0">
-                        <input name="button"  type="button" id="boton_carton_" onclick="Comprobar(value,id)"></inpt>
+                        <input name="button"  type="button" id="boton_carton_"></inpt>
                   </div>
               </td>
             </tr>

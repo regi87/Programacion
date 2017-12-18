@@ -25,8 +25,20 @@ var array_num_bingo=[0];
 var linea = false;
 //bingo
 var bingo = false;
-//contador premios
-var contador = 0;
+//contador para los intervalos y posciones array de las bolas
+var contador_bolas_bingo=0;
+//boton pause
+var boton_pause = document.getElementById("boton_pausa");
+var pause = false;
+//boton REINICIAR
+var boton_reinicar = document.getElementById("boton_reiniciar");
+
+function SetTimeOut(msg,_i)
+{
+  var t=setTimeout("alertMsg('"+msg+"','"+_i+"')",1000);
+}
+
+
 
 function Rand_ArrayCarton()
 {
@@ -74,14 +86,33 @@ function InitBolasBingo()
   //eliminamos el boton inicial del html
   let a = nodoBoton_plantilla_carton.parentNode;
   a.removeChild(nodoBoton_plantilla_carton);
-
       //añadimos al array los clones de los botones por cada posición en el array un clon
-      for(let i=0; i<91; i++)
-      {   arrayNodos_BolasBingo[i]=nodoBoton_plantilla.cloneNode(true);
-          arrayNodos_BolasBingo[i].id="boton_"+i;
-          arrayNodos_BolasBingo[i].value = array_num_bingo[i];
-          nodoBoton_padre.appendChild(arrayNodos_BolasBingo[i]);
+      for (let i = 0; i <91; i++)
+      {
+        arrayNodos_BolasBingo[i]=nodoBoton_plantilla.cloneNode(true);
+        arrayNodos_BolasBingo[i].id="boton_"+i;
+       nodoBoton_padre.appendChild(arrayNodos_BolasBingo[i]);
       }
+      //FUNCIÓN PARA LOS INTERVALOS DE TIEMPO EN SALIR LAS BOLAS
+        Interval();
+}
+function Interval()
+{
+    var interval = setInterval(
+      function()
+      {
+            if(contador_bolas_bingo<arrayNodos_BolasBingo.length && pause == false && bingo == false)
+            {
+               arrayNodos_BolasBingo[contador_bolas_bingo].value = array_num_bingo[contador_bolas_bingo];
+               contador_bolas_bingo++;
+             }
+             else
+             {
+                 clearInterval(interval);
+                 MostramosBotonReiniciio();
+             }
+        }
+        ,2000,"JavaScript"); //intervalo de tiempo entre bola y bola
 }
 
 function InitCarton(_arrayCarton)
@@ -106,13 +137,16 @@ random_Num=Rand_ArrayCarton();
           num =random_Num[e];
           arrayNodos_Carton[i][e] = nodoBoton_plantilla_carton.cloneNode(true);
           arrayNodos_Carton[i][e].id=i+"_"+e;
+
           if(random_Num[e] == 0)
             arrayNodos_Carton[i][e].value = _arrayCarton[e];
           else
           {
             arrayNodos_Carton[i][e].value ="";
+            arrayNodos_Carton[i][e].disabled = "disabled";
           }
           nodoBoton_padre_carton.id="contenido_0";
+          arrayNodos_Carton[i][e].addEventListener("click",function(){Comprobar(arrayNodos_Carton[i][e].value,arrayNodos_Carton[i][e].id,i,e)});
           nodoBoton_padre_carton.appendChild(arrayNodos_Carton[i][e]);
       }
   }
@@ -124,14 +158,17 @@ random_Num=Rand_ArrayCarton();
     for (let e=0; e<9; e++)
       {
           arrayNodos_Carton[i][e] = nodoBoton_plantilla_carton.cloneNode(true);
-          arrayNodos_Carton[i][e].id="boton_carton_"+i+"_"+e;
+          arrayNodos_Carton[i][e].id=i+"_"+e;
           if(random_Num[e] == 0)
               arrayNodos_Carton[i][e].value = _arrayCarton[e+7];
           else
           {
             arrayNodos_Carton[i][e].value ="";
+            arrayNodos_Carton[i][e].disabled = "disabled";
+
           }
           nodoBoton_padre_carton.id="contenido_1";
+          arrayNodos_Carton[i][e].addEventListener("click",function(){Comprobar(arrayNodos_Carton[i][e].value,arrayNodos_Carton[i][e].id,i,e)});
           nodoBoton_padre_carton_1.appendChild(arrayNodos_Carton[i][e]);
       }
   }
@@ -142,20 +179,22 @@ random_Num=Rand_ArrayCarton();
     for (let e=0; e<9; e++)
       {
           arrayNodos_Carton[i][e] = nodoBoton_plantilla_carton.cloneNode(true);
-          arrayNodos_Carton[i][e].id="boton_carton_"+i+"_"+e;
+          arrayNodos_Carton[i][e].id=i+"_"+e;
           if(random_Num[e] == 0)
             arrayNodos_Carton[i][e].value = _arrayCarton[e+16];
           else
           {
             arrayNodos_Carton[i][e].value ="";
+            arrayNodos_Carton[i][e].disabled = "disabled";
           }
           nodoBoton_padre_carton.id="contenido_2";
+          arrayNodos_Carton[i][e].addEventListener("click",function(){Comprobar(arrayNodos_Carton[i][e].value,arrayNodos_Carton[i][e].id,i,e)});
           nodoBoton_padre_carton_2.appendChild(arrayNodos_Carton[i][e]);
       }
   }
 }
 
-function Comprobar(_value,_id)
+function Comprobar(_value,_id,_i,_e)
 {
   let encontradaBola=false;
 
@@ -164,6 +203,7 @@ function Comprobar(_value,_id)
       if(arrayNodos_BolasBingo[i].value == _value)
       {
         encontradaBola = true;
+        arrayNodos_Carton[_i][_e].style.backgroundColor="#FE2E2E";
       }
   }
   if(encontradaBola == true)
@@ -176,22 +216,99 @@ function OpcionesBuscar(_value)
 {
   let i=0;
   let j=0;
-  let num=false;
+  let contador_1_linea=0;
+  let contador_2_linea=0;
+  let contador_3_linea=0;
+
   i = _value.charAt(0);
   j = _value.charAt(2);
 
+  //cambiamos color boton_
+
   arrayNodos_Carton[i][j] =0;
 
-  for (let e = 0; e < arrayNodos_Carton.length; i++)
-  {
-    if(arrayNodos_Carton[0][e] != 0)
-      num = false;
-      else {
-        num=true;
+      for (let e = 0; e <= arrayNodos_Carton.length; e++)
+      {
+        if(arrayNodos_Carton[0][e]== 0)
+        {
+            contador_1_linea++;
+        }
+          if (arrayNodos_Carton[1][e]== 0)
+        {
+            contador_2_linea++;
+        }
+         if (arrayNodos_Carton[2][e]== 0)
+        {
+            contador_3_linea++;
+        }
       }
-  }
+
+      if(linea == false)
+      {
+            if(contador_1_linea == 5)
+            {
+              linea = true;
+              console.log("LINEA - 1");
+            }
+               if(contador_2_linea == 5)
+               {
+                 linea = true;
+                 console.log("LINEA - 2");
+               }
+                 if(contador_3_linea == 5)
+                 {
+                   linea = true;
+                   console.log("LINEA - 3");
+                 }
+        }
+
+    else
+    {
+      if(contador_1_linea == 5 && contador_2_linea==5 && contador_3_linea == 5)
+      {
+        console.log("BINGO");
+        bingo = true;
+        MostramosBotonReiniciio();
+      }
+    }
 }
 
-RellenamosArraysBingo();
-RellenamosArraysCarton();
-InitBolasBingo();
+function InitBotonesFunciones(_value)
+{
+  if (_value=="PAUSA")
+    {
+      pause = true;
+      boton_pause.value = "REANUDAR";
+    }
+    else
+    {
+      pause = false;
+      boton_pause.value = "PAUSA";
+      Interval();
+    }
+}
+
+function MostramosBotonReiniciio()
+{
+  boton_reiniciar.style.visibility="visible";
+}
+
+function Reiniciar ()
+{
+  location.reload(true);
+}
+
+function load()
+{
+  boton_pause.addEventListener("click",function(){InitBotonesFunciones(boton_pause.value)});
+  boton_reinicar.addEventListener("click",function(){Reiniciar()});
+  boton_reiniciar.style.visibility="hidden";
+
+
+  console.log("WINDOW CARGADA");
+  RellenamosArraysBingo();
+  RellenamosArraysCarton();
+  InitBolasBingo();
+}
+
+window.onload=load;
