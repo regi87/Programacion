@@ -38,8 +38,6 @@ function SetTimeOut(msg,_i)
   var t=setTimeout("alertMsg('"+msg+"','"+_i+"')",1000);
 }
 
-
-
 function Rand_ArrayCarton()
 {
   let _random_Num=[0];
@@ -61,24 +59,27 @@ function Rand_ArrayCarton()
 
 function RellenamosArraysCarton()
 {
-    let aleatorio=[0];
+    let aleatorioBingo=[0];
+    let aleatorioCarton=[0];
+    let contador_=0;
     //igualamos al array del bingo con los 90 num
-    aleatorio=array_num_bingo;
+    aleatorioCarton=array_num_bingo.slice(0);
+    aleatorioBingo=array_num_bingo;
     //los ordenamos al azar
-    aleatorio.sort(() => Math.random() > 0.5 ? 1 : -1);
+    aleatorioCarton.sort(() => Math.random() > 0.5 ? 1 : -1);
+    aleatorioBingo.sort(() => Math.random() > 0.5 ? 1 : -1);
     //tomamos 27
-    array_num_ale_carton = aleatorio.slice(0, 27);
+    array_num_ale_carton = aleatorioCarton.slice(0, 27);
 
     InitCarton(array_num_ale_carton);
 }
 
 function RellenamosArraysBingo()
 {
-  for (var i = 1; i < 92; i++)
+  for (var i = 1; i < 91; i++)
   {
       array_num_bingo[i-1]=i;
   }
-  array_num_bingo.sort();
 }
 
 function InitBolasBingo()
@@ -151,7 +152,6 @@ random_Num=Rand_ArrayCarton();
       }
   }
   random_Num=Rand_ArrayCarton();
-
   //añadimos al array los clones de los botones por cada posición en el array un clon
   for (let i=1; i<2; i++)
   {
@@ -165,7 +165,6 @@ random_Num=Rand_ArrayCarton();
           {
             arrayNodos_Carton[i][e].value ="";
             arrayNodos_Carton[i][e].disabled = "disabled";
-
           }
           nodoBoton_padre_carton.id="contenido_1";
           arrayNodos_Carton[i][e].addEventListener("click",function(){Comprobar(arrayNodos_Carton[i][e].value,arrayNodos_Carton[i][e].id,i,e)});
@@ -224,7 +223,6 @@ function OpcionesBuscar(_value)
   j = _value.charAt(2);
 
   //cambiamos color boton_
-
   arrayNodos_Carton[i][j] =0;
 
       for (let e = 0; e <= arrayNodos_Carton.length; e++)
@@ -284,6 +282,7 @@ function InitBotonesFunciones(_value)
     {
       pause = false;
       boton_pause.value = "PAUSA";
+      boton_reiniciar.style.visibility="hidden";
       Interval();
     }
 }
