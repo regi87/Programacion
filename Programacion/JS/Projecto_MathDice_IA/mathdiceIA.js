@@ -5,31 +5,23 @@
 
 //dado 12 caras
 var dado12_caras = 12;
-
 //Un array para los tres dados de 6 caras
 var arrayDado_6caras = [0,0,0];
-
 //Un array para los dos dados de 3 caras
 var arrayDado_3caras = [0,0];
-
 // Nodos padres para la colocación del hijo
 var nodoBoton_padre_1 = document.getElementById("botones_1");
 var nodoBoton_padre_2 = document.getElementById("botones_2");
 //nodo Plantilla
 var nodoBoton_plantilla = document.getElementById("boton_");
-
 //array nodos
 var arrayNodos = [0];
-
 //contador botones operaciones
 var contador_boton_operacion=0;
-
 //array para añadir la operación
 var comprobacionOperacion =[0];
-
 //contador para index del array comprobacionOperacion
 var contador_operacion = 0;
-
 //comprobacion ultimo boton pulsado
 var comprobacionBoton = 0;
 //Nuevo Hilo en Backgroud
@@ -38,20 +30,30 @@ var myWorker = new Worker('Worker_IA.js');
 //Funcion para darle valor a los arrays de cada dado
 function ValoresDados ()
 {
+  let resultado=0;
   dado12_caras = parseInt (Math.random() * (13 - 1) + 1);
+  while (resultado < dado12_caras)
+  {
+      for(let i = 0; i< 3; i++)
+      {
+        arrayDado_6caras[i] = parseInt (Math.random() * (7 - 1) + 1);
+        resultado +=arrayDado_6caras[i];
+      }
 
-  for(let i = 0; i< 3; i++)
-    arrayDado_6caras[i] = parseInt (Math.random() * (7 - 1) + 1);
+      for(let i = 0; i<2; i++)
+      {
+        arrayDado_3caras[i] = parseInt (Math.random() * (4 - 1) + 1);
+        resultado +=arrayDado_3caras[i];
+      }
+      console.log(resultado);
+   }
 
-  for(let i = 0; i<2; i++)
-    arrayDado_3caras[i] = parseInt (Math.random() * (4 - 1) + 1);
+  //Función para enviar los datos a la IA
+       IA(dado12_caras, arrayDado_6caras, arrayDado_3caras)
 
-//Función para enviar los datos a la IA
-     IA(dado12_caras, arrayDado_6caras, arrayDado_3caras)
+        MostrarPorPantallaDados();
 
-      MostrarPorPantallaDados();
 }
-
 
 function MostrarPorPantallaDados ()
 {
