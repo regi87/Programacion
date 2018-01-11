@@ -5,8 +5,6 @@
     <title>FIGURA 1</title>
   </head>
   <body>
-
     <?php include ("Figura_1.php"); ?>
-
   </body>
 </html>
