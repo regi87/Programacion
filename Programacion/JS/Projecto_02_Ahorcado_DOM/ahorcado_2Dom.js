@@ -93,7 +93,6 @@ function Comprobamos (letra, boton_id)
     imagenModificar.src="Imagenes_Ahorcado/imagen_"+contadorFallos+".png";
   }
 
-
   console.log(contadorAciertos);
   console.log(contadorFallos);
   console.log( palabra[num_ale].length);
