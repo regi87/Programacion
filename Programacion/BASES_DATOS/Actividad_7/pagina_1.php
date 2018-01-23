@@ -19,7 +19,6 @@
               {
                 $this->conector = new mysqli("localhost","root","","world");
 
-
                 if($this->conector ->connect_errno)
                 {
                   echo "Fallo al conectar a MySQL: ".$this->conector->connect_error;
