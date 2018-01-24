@@ -1,3 +1,6 @@
-#myfirstchart {
- altura: 150px;
+#myfirstchart
+{
+  display: inline-block;
+  height: 5000%;
+  width: 100%;
  }
