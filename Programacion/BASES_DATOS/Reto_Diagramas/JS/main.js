@@ -33,7 +33,7 @@ function Init(arrayNombres_Superficie) {
     data: arrayNombres_Superficie,
     // The name of the data record attribute that contains x-values.
     xkey: 'Name',
-    //ymax: 300,
+  ymax: 50,
     // A list of names of data record attributes that contain y-values.
     ykeys: ['SurfaceArea'],
 
@@ -60,7 +60,7 @@ function Init_Pagina_2(arrayJapon_Poblacion) {
     data: arrayJapon_Poblacion,
     // The name of the data record attribute that contains x-values.
     xkey: 'Name',
-    //ymax: 300,
+    ymax: 50,
     // A list of names of data record attributes that contain y-values.
     ykeys: ['Population'],
 
