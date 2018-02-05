@@ -37,8 +37,13 @@
                 $apellidos = $row['apellidos'];
                 $edad = $row['edad'];
                 $curso = $row['curso'];
+                $correo = $row['correo'];
+                $user_name = $row['user_name'];
+                $contrasenya= $row['contrasenya'];
 
-                echo "NOMBRE: ".$nombre." <br> "."APELLIDOS: ".$apellidos. "<br>"."EDAD: ".$edad."<br>"."CURSO: ".$curso." "."<br>"."<br>";
+
+                echo "NOMBRE: ".$nombre." <br> "."APELLIDOS: ".$apellidos. "<br>"."EDAD: ".$edad.
+                "<br>"."CURSO: ".$curso." <br>"."CORREO: ".$correo. "<br>". "NOMBRE USUARIO:  ".$user_name. "<br>"."CONTRASEÑA:  ".$contrasenya." "."<br>"."<br>";
 
             }
             //Creamos el JSON

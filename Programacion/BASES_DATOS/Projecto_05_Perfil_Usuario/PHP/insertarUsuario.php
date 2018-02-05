@@ -26,9 +26,13 @@
          $apellidos =$_POST["apellidos"];
          $edad =$_POST["edad"];
          $curso =$_POST["curso"];
+         $correo =$_POST["correo"];
+         $user_name =$_POST["user_name"];
+         $contrasenya =$_POST["contrasenya"];
 
-        $resultado = $this->conector->query("INSERT INTO Usuarios (nombre, apellidos, edad,curso)
-                      VALUES ('$nombre', '$apellidos', '$edad', '$curso')");
+        $resultado = $this->conector->query
+        ("INSERT INTO Usuarios (nombre, apellidos, edad,curso,correo,user_name,contrasenya)
+                      VALUES ('$nombre', '$apellidos', '$edad', '$curso','$correo','$user_name','$contrasenya')");
 
         if ($this->conector->query($resultado) === TRUE)
         {
