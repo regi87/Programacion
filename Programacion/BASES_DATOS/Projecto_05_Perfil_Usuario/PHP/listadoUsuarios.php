@@ -23,7 +23,7 @@
       function MostrarDatos()
       {
 
-         $consulta = "Select * from Usuarios";
+         $consulta = "Select nombre,apellidos,edad,curso,correo,user_name,contrasenya from Usuarios";
 
         $resultado = $this->conector->query($consulta);
 
@@ -41,12 +41,20 @@
                 $user_name = $row['user_name'];
                 $contrasenya= $row['contrasenya'];
 
-
-                echo "NOMBRE: ".$nombre." <br> "."APELLIDOS: ".$apellidos. "<br>"."EDAD: ".$edad.
-                "<br>"."CURSO: ".$curso." <br>"."CORREO: ".$correo. "<br>". "NOMBRE USUARIO:  ".$user_name. "<br>"."CONTRASEÑA:  ".$contrasenya." "."<br>"."<br>";
-
+                $arrayUsuarios[] = array('nombre'=> $nombre,
+                                    'apellidos'=> $apellidos,'edad'=>$edad, 'curso'=>$curso,
+                                  'correo'=>$correo,'user_name'=>$user_name,'contrasenya'=>$contrasenya);
+              //  echo "NOMBRE: ".$nombre." <br> "."APELLIDOS: ".$apellidos. "<br>"."EDAD: ".$edad.
+                //"<br>"."CURSO: ".$curso." <br>"."CORREO: ".$correo. "<br>". "NOMBRE USUARIO:  ".$user_name. "<br>"."CONTRASEÑA:  ".$contrasenya." "."<br>"."<br>";
             }
             //Creamos el JSON
+
+
+            $json_string = json_encode($arrayUsuarios);
+            echo $json_string;
+
+
+
 
       }
 

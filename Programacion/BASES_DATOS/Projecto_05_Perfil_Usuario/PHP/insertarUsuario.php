@@ -30,10 +30,11 @@
          $user_name =$_POST["user_name"];
          $contrasenya =$_POST["contrasenya"];
 
-        $resultado = $this->conector->query
-        ("INSERT INTO Usuarios (nombre, apellidos, edad,curso,correo,user_name,contrasenya)
-                      VALUES ('$nombre', '$apellidos', '$edad', '$curso','$correo','$user_name','$contrasenya')");
+         $sql ="INSERT INTO Usuarios (nombre, apellidos, edad,curso,correo,user_name,contrasenya)
+                       VALUES ('$nombre','$apellidos','$edad','$curso','$correo','$user_name','$contrasenya')";
+        $resultado = $this->conector->query($sql);
 
+        /*
         if ($this->conector->query($resultado) === TRUE)
         {
           echo "New record created successfully";
@@ -42,6 +43,7 @@
           {
               echo "Error: " . $resultado . "<br>" . $this->conector->error;
           }
+          */
 
         $this->Envio_Datos();
       }
@@ -50,7 +52,7 @@
       function Envio_Datos()
       {
         //Abrimos la pagina para mostrar el listado de Usuarios
-          include 'listadoUsuarios.php';
+        header ("Location: ../HTML/listado_Usuarios_delete.html");
 
       }
     }
