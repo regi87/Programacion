@@ -3,7 +3,7 @@
     /**
      * insertarUsuario
      */
-    class Insert
+    class Actualizar
     {
       private $conector;
       function ComprobarConexion()
@@ -29,14 +29,48 @@
          $correo =$_POST["correo"];
          $user_name =$_POST["user_name"];
          $contrasenya =$_POST["contrasenya"];
+         //input hidden nombre usuario a modificar
+         $usuario =$_POST["usuario"];
+         $contador =1;
+         $arrayConsulta =  array('id','nombre','apellidos','edad','curso','correo','user_name','contrasenya');
+         $arrayDatos =  array("id",$nombre,$apellidos,$edad,$curso,$correo,$user_name,$contrasenya);
 
+        // echo $usuario."--".$nombre;
+         while ($contador <= 7)
+         {
+           $sql = "Select * from Usuarios";
+           $resultado= $this->conector->query($sql);
+           $row = $resultado->fetch_row();
+           /* obtener el array de objetos */
+
+
+      if($row[$contador]!=$arrayDatos[$contador])
+           {
+             echo $arrayConsulta[$contador]."-".$arrayDatos[$contador]."-".$row[$contador];
+
+             $sql ="UPDATE  Usuarios
+             SET $arrayConsulta[$contador]='$arrayDatos[$contador]'
+             WHERE nombre='$usuario'";
+             $resultado = $this->conector->query($sql);
+           }
+          // echo $row[0]."__".$arrayConsulta[$contador]."<br>";
+
+           $contador++;
+         }
+
+
+
+
+
+
+/*
          $sql ="INSERT INTO Usuarios (nombre, apellidos, edad,curso,correo,user_name,contrasenya)
                        VALUES ('$nombre','$apellidos','$edad','$curso','$correo','$user_name','$contrasenya')";
         $resultado = $this->conector->query($sql);
+*/
 
-      
 
-        $this->Envio_Datos();
+      //$this->Envio_Datos();
       }
 
 
@@ -46,9 +80,10 @@
         header ("Location: ../HTML/listado_Usuarios_delete.html");
 
       }
+
     }
     //Creamos el objeto para acceder a los metodos
-    $classObject = new Insert;
+    $classObject = new Actualizar;
     $classObject->ComprobarConexion();
 
 

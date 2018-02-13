@@ -22,14 +22,10 @@
 
       function MostrarDatos()
       {
-
-         $consulta = "Select nombre,apellidos,edad,curso,correo,user_name,contrasenya from Usuarios";
+        $consulta = "Select nombre,apellidos,edad,curso,correo,user_name,contrasenya from Usuarios";
 
         $resultado = $this->conector->query($consulta);
-
-
-          $arrayUsuarios = array(); //creamos un array
-
+        $arrayUsuarios = array(); //creamos un array
 
             while($row = mysqli_fetch_array($resultado))
             {
@@ -48,22 +44,13 @@
                 //"<br>"."CURSO: ".$curso." <br>"."CORREO: ".$correo. "<br>". "NOMBRE USUARIO:  ".$user_name. "<br>"."CONTRASEÑA:  ".$contrasenya." "."<br>"."<br>";
             }
             //Creamos el JSON
-
-
             $json_string = json_encode($arrayUsuarios);
             echo $json_string;
-
-
-
-
       }
-
-
 
     }
     //Creamos el objeto para acceder a los metodos
     $classObject = new Mostrar;
     $classObject->ComprobarConexion();
-
 
 ?>
