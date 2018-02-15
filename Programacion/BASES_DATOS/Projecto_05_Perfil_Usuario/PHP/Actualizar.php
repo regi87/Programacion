@@ -16,11 +16,11 @@
         }
         else
         {
-          $this->InsertarDatos();
+          $this->ActualizarDatos();
         }
       }
 
-      function InsertarDatos()
+      function ActualizarDatos()
       {
          $nombre =$_POST["nombre"];
          $apellidos =$_POST["apellidos"];
@@ -35,42 +35,32 @@
          $arrayConsulta =  array('id','nombre','apellidos','edad','curso','correo','user_name','contrasenya');
          $arrayDatos =  array("id",$nombre,$apellidos,$edad,$curso,$correo,$user_name,$contrasenya);
 
-        // echo $usuario."--".$nombre;
-         while ($contador <= 7)
+         $sql = "Select * from Usuarios";
+         $resultado= $this->conector->query($sql);
+         $row = $resultado->fetch_row();
+
+         $sql ="UPDATE  Usuarios
+         SET nombre='$nombre',apellidos='$apellidos',edad='$edad',curso='$curso',
+         correo='$correo',user_name='$user_name',contrasenya='$contrasenya'
+         WHERE nombre='$usuario'";
+         $resultado = $this->conector->query($sql);
+
+         /*
+         while ($contador <= 2)
          {
-           $sql = "Select * from Usuarios";
-           $resultado= $this->conector->query($sql);
-           $row = $resultado->fetch_row();
-           /* obtener el array de objetos */
-
-
-      if($row[$contador]!=$arrayDatos[$contador])
-           {
-             echo $arrayConsulta[$contador]."-".$arrayDatos[$contador]."-".$row[$contador];
-
-             $sql ="UPDATE  Usuarios
-             SET $arrayConsulta[$contador]='$arrayDatos[$contador]'
-             WHERE nombre='$usuario'";
-             $resultado = $this->conector->query($sql);
-           }
-          // echo $row[0]."__".$arrayConsulta[$contador]."<br>";
-
+           if($row[$contador]!=$arrayDatos[$contador])
+               {
+                 echo "Contador: ".$contador."--"."Campo:".$arrayConsulta[$contador]."--"."Valor Nuevo:".$arrayDatos[$contador]."--"."Campo Base Datos:".$row[$contador]."<br>";
+                 $sql ="UPDATE  Usuarios
+                 SET $arrayConsulta[$contador]='$arrayDatos[$contador]'
+                 WHERE nombre='$usuario'";
+                 $resultado = $this->conector->query($sql);
+               }
            $contador++;
          }
+         */
 
-
-
-
-
-
-/*
-         $sql ="INSERT INTO Usuarios (nombre, apellidos, edad,curso,correo,user_name,contrasenya)
-                       VALUES ('$nombre','$apellidos','$edad','$curso','$correo','$user_name','$contrasenya')";
-        $resultado = $this->conector->query($sql);
-*/
-
-
-      //$this->Envio_Datos();
+         $this->Envio_Datos();
       }
 
 
