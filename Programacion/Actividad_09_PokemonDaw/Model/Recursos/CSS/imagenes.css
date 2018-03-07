@@ -1,0 +1,22 @@
+
+    .img_1
+    {
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        z-index: -1;
+      }
+      .img_2
+      {
+          position: absolute;
+          right: 100px;
+          top: 100px;
+          z-index: -1;
+        }
+        body
+        {
+          background-image: url("../Imagenes/fondo_arena.jpg");
+          background-repeat: no-repeat;
+          background-size: 1500px 600px;
+
+        }
