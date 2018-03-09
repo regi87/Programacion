@@ -9,7 +9,7 @@ $(document).ready(function()
         let input_id="";
         input_id=$(this).attr("id");
 
-        if(input_id=="pikachu" || input_id=="bulbasur")
+        if(input_id=="joskachu" || input_id=="serbasur")
         {
             document.getElementById("jugar").style.visibility = "visible";
             submitInfo(input_id);

@@ -16,18 +16,18 @@ function CrearObjetoPokemon($_pokemon_selected)
   $array2=array("");
   $_pokemon_selected_2="";
 
-  if($_pokemon_selected == "pikachu")
+  if($_pokemon_selected == "joskachu")
   {
       $pokemon_1= new Pikachu();
       $pokemon_2= new Bulbasur();
-      $_pokemon_selected_2 = "bulbasur";
+      $_pokemon_selected_2 = "serbasur";
 
   }
-    else if ("bulbasur")
+    else if ("serbasur")
     {
       $pokemon_1= new Bulbasur();
       $pokemon_2= new Pikachu();
-      $_pokemon_selected_2 = "picachu";
+      $_pokemon_selected_2 = "joskachu";
 
     }
   $array=$pokemon_1->GetPokemon();

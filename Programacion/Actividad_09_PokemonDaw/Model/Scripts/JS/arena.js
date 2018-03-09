@@ -1,55 +1,123 @@
 $(document).ready(function()
 {
+  //array para guardar los datos recibidos de Ajax
   var returnedData=[];
+  //var nombre pokemon
   var nomPokemon=document.getElementById("pokemon").value;
+  //var imagenes pokemon
   var pokemon_Player=document.getElementById("pokemon_Player");
   var pokemon_Player_2=document.getElementById("pokemon_Player_2");
-
-
-
+  //variable nombre pokemon turno solo texto
   var turnos=document.getElementById("turnos");
+  var turnoPoke=0;
+  //variables vida de los pokemon
   var vida_1=document.getElementById("vida_1");
   var vida_2=document.getElementById("vida_2");
-
-
+//var dom cronometro
   var cronometro=document.getElementById("cronometro");
+  var time=20;
+  //var par parar el funcion
+  var parar =0;
 
-  function tiempo()
+    function funcionTiempoStart()
     {
+      parar= setInterval(funcionTiempoBatalla, 1000);
+    }
+    function restartTiempo()
+    {
+      clearInterval(parar);
+      time=20;
+      cronometro.innerHTML=time;
+      funcionTiempoStart();
+    }
+    function funcionTiempoBatalla()
+    {
+      time-=1;
+      cronometro.innerHTML=time;
 
-      setInterval(function(){ cronometro.innerHTML-=1;}, 1000);
-
-      if(cronometro.innerHTML==0)
+       if(turnoPoke==0 && time == 0)
         {
-          
+          turnoPoke=1;
+          turnos.innerHTML="TURNO DE "+returnedData[1]["pokemon_selected"].toUpperCase();
+          restartTiempo();
         }
-
+      else if(turnoPoke==1 && time == 0)
+         {
+           turnoPoke=0;
+           turnos.innerHTML="TURNO DE "+returnedData[0]["pokemon_selected"].toUpperCase();
+           restartTiempo();
+         }
+         if (returnedData[0]["salud"]<= 0 || returnedData[1]["salud"]<=0)
+         {
+           tiempoParar();
+         }
     }
-    function Combate()
+    function tiempoParar()
     {
-
+      clearInterval(parar);
     }
-
-
+    function Ataque(typePl,typeEne)
+    {
+      if (typePl==0)
+      {
+        returnedData[typeEne]["salud"]-=returnedData[typePl]["ataque"];
+        vida_2.innerHTML=returnedData[typeEne]["salud"]+"/"+returnedData[typeEne]["salud"];
+        document.getElementById("bar_2_vida").style.width=returnedData[typeEne]["salud"]+"%";
+      }
+      if (typePl==1)
+      {
+        returnedData[typeEne]["salud"]-=returnedData[typePl]["ataque"];
+        vida_1.innerHTML=returnedData[typeEne]["salud"]+"/"+returnedData[typeEne]["salud"];
+        document.getElementById("bar_1_vida").style.width=returnedData[typeEne]["salud"]+"%";
+      }
+    }
+    function Defensa(typePl,typeEne)
+    {
+      if (typePl==0)
+      {
+        returnedData[typeEne]["ataque"]-=returnedData[typePl]["defensa"];
+        returnedData[typePl]["stamina"]-=20;
+      }
+      if (typePl==1)
+      {
+        returnedData[typeEne]["ataque"]-=returnedData[typePl]["defensa"];
+        returnedData[typePl]["stamina"]-=20;
+      }
+    }
+    //Funciones para el click del ratón
     $('input').click(function ()
     {
         let input_id="";
         input_id=$(this).attr("id");
 
-        if(input_id == "ataque_Player_1")
-            console.log(input_id+"--"+returnedData[0]["pokemon_selected"]+"-"+returnedData[0]["ataque"]);
-            else if (input_id == "defensa_Player_1")
+            if(input_id == "ataque_Player_1" && turnoPoke ==0)
             {
-              console.log(input_id+"--"+returnedData[0]["pokemon_selected"]+"-"+returnedData[0]["defensa"]);
+                Ataque(0,1);
+                turnoPoke=1;
+                turnos.innerHTML="TURNO DE "+returnedData[1]["pokemon_selected"].toUpperCase();
+                restartTiempo();
             }
-
-            if(input_id == "ataque_Player_2")
-                console.log(input_id+"--"+returnedData[1]["pokemon_selected"]+"-"+returnedData[1]["ataque"]);
-                else if (input_id == "defensa_Player_2")
-                {
-                  console.log(input_id+"--"+returnedData[1]["pokemon_selected"]+"-"+returnedData[1]["defensa"]);
-                }
-
+            else if (input_id == "defensa_Player_1" && turnoPoke ==0 && returnedData[0]["stamina"] >0)
+            {
+                Defensa(0,1);
+                turnoPoke=1;
+                turnos.innerHTML="TURNO DE "+returnedData[1]["pokemon_selected"].toUpperCase();
+                restartTiempo();
+            }
+            if(input_id == "ataque_Player_2" && turnoPoke==1 )
+            {
+                Ataque(1,0);
+                turnoPoke=0;
+                turnos.innerHTML="TURNO DE "+returnedData[0]["pokemon_selected"].toUpperCase();
+                restartTiempo();
+            }
+           else if (input_id == "defensa_Player_2"  && turnoPoke==1 && returnedData[1]["stamina"] >0)
+              {
+                Defensa(1,0);
+                turnoPoke=0;
+                turnos.innerHTML="TURNO DE "+returnedData[0]["pokemon_selected"].toUpperCase();
+                restartTiempo();
+              }
     });
 
     function RecogemosValores (_nomPokemon)
@@ -79,28 +147,16 @@ $(document).ready(function()
     function SacamosPantalla(_returnedData)
     {
       //imagen pokemon
-      if(_returnedData[0]["pokemon_selected"]=="pikachu")
-      {
-        pokemon_Player.src="../Recursos/Imagenes/pikachu.png";
-        pokemon_Player_2.src="../Recursos/Imagenes/bulbasur.png";
-      }
-
-      else if (_returnedData[0]["pokemon_selected"]=="bulbasur")
-      {
-        pokemon_Player.src="../Recursos/Imagenes/bulbasur.png";
-        pokemon_Player_2.src="../Recursos/Imagenes/pikachu.png";
-      }
+      pokemon_Player.src="../Recursos/Imagenes/"+_returnedData[0]["pokemon_selected"]+".gif";
+      pokemon_Player_2.src="../Recursos/Imagenes/"+_returnedData[1]["pokemon_selected"]+".gif";
       //texto turno de ...
       turnos.innerHTML="TURNO DE "+_returnedData[0]["pokemon_selected"].toUpperCase();
-
       //mostramos info del pokemon
-      vida_1.innerHTML=_returnedData[0]["salud"]+"/"+_returnedData[0]["salud"]+"   "+"   "+_returnedData[0]["defensa"]+"/"+_returnedData[0]["defensa"];
-      vida_2.innerHTML=_returnedData[0]["salud"]+"/"+_returnedData[1]["salud"]+"   "+"   "+_returnedData[1]["defensa"]+"/"+_returnedData[1]["defensa"];
-      tiempo();
+      vida_1.innerHTML=_returnedData[0]["salud"]+"/"+_returnedData[0]["salud"];
+      vida_2.innerHTML=_returnedData[1]["salud"]+"/"+_returnedData[1]["salud"];
+      //Inicializamos el tiempo
+      funcionTiempoStart();
     }
 
-
     RecogemosValores(nomPokemon);
-
-
 });

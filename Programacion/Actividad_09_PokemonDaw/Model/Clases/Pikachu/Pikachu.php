@@ -2,7 +2,7 @@
 require_once "/Applications/XAMPP/xamppfiles/htdocs/1daw/Programacion/Programacion/Actividad_09_PokemonDaw/Model/Clases/Pokemon.php";
 
   /**
-   * clase pikachu
+   * clase joskachu
    */
   class Pikachu extends Pokemon
   {
@@ -10,7 +10,7 @@ require_once "/Applications/XAMPP/xamppfiles/htdocs/1daw/Programacion/Programaci
 
     function __construct()
     {
-      parent::__construct(120,5,10,50);
+      parent::__construct(100,10,1,40);
       $this->arrayPikachu=parent::GetAttributePokemon();
     }
 
