@@ -1,4 +1,3 @@
-
 <?php
     /**
      * Comprobar Datos
@@ -22,11 +21,9 @@
       {
         $recibido =$_POST["busqueda"];
         $busqueda = explode("-", $recibido);
-
         $resultado = $this->conector->query("Select * from Usuarios where $busqueda[0] = '$busqueda[1]'");
         $contar = mysqli_num_rows($resultado);
         $json_string = json_encode($contar);
-
         echo $json_string;
       }
     }
